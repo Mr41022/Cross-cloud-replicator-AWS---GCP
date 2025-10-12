@@ -1,5 +1,6 @@
+from moto.core.decorator import mock_aws
 import pytest
-from moto import mock_s3
+from moto import mock_aws
 from unittest.mock import patch, MagicMock
 from botocore.exceptions import ClientError
 import base64
@@ -20,7 +21,7 @@ def mock_gcs_blob():
 
 #  Test: Successful replication of new file
 
-@mock_s3
+@mock_aws
 def test_replicate_new_file(mock_gcs_blob):
    
     conn = s3_client 
@@ -40,7 +41,7 @@ def test_replicate_new_file(mock_gcs_blob):
 
  #Test: Idempotent skip for single-part file with matching hash
 
-@mock_s3
+@mock_aws
 def test_idempotent_skip_single_part(mock_gcs_blob):
     conn = s3_client
     conn.create_bucket(Bucket='test-bucket', CreateBucketConfiguration={'LocationConstraint': 'eu-north-1'})
@@ -63,7 +64,7 @@ def test_idempotent_skip_single_part(mock_gcs_blob):
 
   # Test: Idempotent skip logic for multipart ETag
 
-@mock_s3
+@mock_aws
 def test_idempotent_skip_multipart_etag(mock_gcs_blob):
     conn = s3_client
     conn.create_bucket(Bucket='test-bucket', CreateBucketConfiguration={'LocationConstraint': 'eu-north-1'})
@@ -83,7 +84,7 @@ def test_idempotent_skip_multipart_etag(mock_gcs_blob):
 
   # Test: Checksum mismatch triggers deletion
 
-@mock_s3
+@mock_aws   
 def test_checksum_mismatch(mock_gcs_blob):
     conn = s3_client
     conn.create_bucket(Bucket='test-bucket', CreateBucketConfiguration={'LocationConstraint': 'eu-north-1'})
@@ -105,7 +106,7 @@ def test_checksum_mismatch(mock_gcs_blob):
 
 #  Test: Checksum mismatch triggers deletion
 
-@mock_s3
+@mock_aws
 def test_retry_on_transient_error(mock_gcs_blob):
     conn = s3_client
     conn.create_bucket(Bucket='test-bucket', CreateBucketConfiguration={'LocationConstraint': 'eu-north-1'})
@@ -121,7 +122,7 @@ def test_retry_on_transient_error(mock_gcs_blob):
 
  #  Test: S3 object not found triggers error
 
-@mock_s3
+@mock_aws
 def test_s3_not_found():
     conn = s3_client
     conn.create_bucket(Bucket='test-bucket', CreateBucketConfiguration={'LocationConstraint': 'eu-north-1'})
