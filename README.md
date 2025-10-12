@@ -11,7 +11,7 @@ Event-driven Python service to replicate objects from AWS S3 to Google Cloud Sto
 - **Why?** Streaming + spool suits AI-scale data. Idempotency prevents duplicates in event storms. Supports AryaXAI's cross-cloud ML workflows.
 
 ## Sequence Diagram
-![Sequence Diagram](docs/Sequence_diagram.png)
+![Sequence Diagram](docs/Sequence_digram.png)
 
 ## Setup & Run
 1. Clone: `git clone your-repo-url`
