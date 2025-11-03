@@ -1,4 +1,4 @@
-# Cross-Cloud Event-Driven Storage Replicator
+# Cross-cloud-replicator-AWS<->GCP
 
 Event-driven Python service to replicate objects from AWS S3 to Google Cloud Storage (GCS), optimized for high availability of AryaXAI's multi-cloud AI datasets (e.g., ML embeddings, training files).
 
